@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mini whatsapp</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> 
+
+</head>
+<body>
+    <h1>All Chats!</h1>
+    <form method="get" action="/chats/new">
+        <button type="submit" class="btn btn-primary">+New Chat</button>
+    </form>
+    <br><br>
+   <%  for(let chat of chats){ %> 
+    <div class="chat">from: <i> <%= chat.from %> </i>
+         <div class="msg"> <%= chat.msg %></div>
+         recieved by <i> <%= chat.to %> </i>
+         <p><%= chat.created_at.toString().split(" ")[4] %> <br>
+            <%= chat.created_at.toString().split(" ").slice(0,4).join("-") %>
+        </p>
+        <form method="get" action="/chats/<%= chat._id %>/edit">
+        <button class="btn btn-info">edit</button>
+        </form>&nbsp;&nbsp; 
+        <form method="post" action="/chats/<%= chat._id %>?_method=DELETE">
+            <button class="btn btn-warning">delete</button>
+        </form>
+    </div><br><br>
+    <% } %>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
+</body>
+
+</html>
